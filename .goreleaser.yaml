@@ -37,20 +37,16 @@ builds:
 
 nfpms:
   - id: packages
-    license: MIT
-    maintainer: "Lerian Studio <https://github.com/maxwelbm>"
-    package_name: mdz
-    description: "MDZ CLI: Uma ferramenta útil para gestão de ambiente"
-    homepage: "https://github.com/maxwelbm/mdz"
-    vendor: "Lerian Studio"
+    license: Apache-2.0 license
+    maintainer: Lerian Studio Technologies <https://github.com/maxwelbm>
+    package_name: azion
+    homepage: https://github.com/maxwelbm/mdz
+    bindir: /usr/local/bin
     formats:
+      - apk
       - deb
       - rpm
       - archlinux
-    bindir: /usr/local/bin
-    contents:
-      - src: ./dist/{{ .Binary }}_{{ .Os }}_{{ .Arch }}
-        dst: /usr/local/bin/{{ .Binary }}
 
 changelog:
   sort: asc
