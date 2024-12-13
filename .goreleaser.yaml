@@ -39,13 +39,13 @@ nfpms:
   - id: packages
     license: MIT
     maintainer: Lerian Studio <https://github.com/maxwelbm>
-    package_name: azion
+    package_name: mdz
     homepage: https://github.com/maxwelbm/mdz
     bindir: /usr/local/bin
     formats:
-      - apk
       - deb
       - rpm
+      - archlinux
 
 changelog:
   sort: asc
