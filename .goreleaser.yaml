@@ -49,7 +49,7 @@ nfpms:
       - archlinux
     bindir: /usr/local/bin
     contents:
-      - src: ./dist/mdz
+      - src: ./dist/{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
         dst: /usr/local/bin/mdz
 
 changelog:
