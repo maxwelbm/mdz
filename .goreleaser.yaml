@@ -49,8 +49,8 @@ nfpms:
       - archlinux
     bindir: /usr/local/bin
     contents:
-      - src: ./dist/{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}
-        dst: /usr/local/bin/mdz
+      - src: ./dist/{{ .Binary }}_{{ .Os }}_{{ .Arch }}
+        dst: /usr/local/bin/{{ .Binary }}
 
 changelog:
   sort: asc
