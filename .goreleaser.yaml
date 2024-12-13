@@ -38,14 +38,19 @@ builds:
 nfpms:
   - id: packages
     license: MIT
-    maintainer: Lerian Studio <https://github.com/maxwelbm>
+    maintainer: "Lerian Studio <https://github.com/maxwelbm>"
     package_name: mdz
-    homepage: https://github.com/maxwelbm/mdz
-    bindir: /usr/local/bin
+    description: "MDZ CLI: Uma ferramenta útil para gestão de ambiente"
+    homepage: "https://github.com/maxwelbm/mdz"
+    vendor: "Lerian Studio"
     formats:
       - deb
       - rpm
       - archlinux
+    bindir: /usr/local/bin
+    contents:
+      - src: ./dist/mdz
+        dst: /usr/local/bin/mdz
 
 changelog:
   sort: asc
