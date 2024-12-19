@@ -1,0 +1,107 @@
+name: "Publish Packages Choco"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  publish-choco-package:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get version from Git tags
+        id: get_version
+        run: |
+          # Obter a última tag Git
+          version=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          # Incrementar o patch
+          major=$(echo $version | cut -d. -f1 | sed 's/v//')
+          minor=$(echo $version | cut -d. -f2)
+          patch=$(echo $version | cut -d. -f3)
+          new_patch=$((patch + 1))
+          new_version="v${major}.${minor}.${new_patch}"
+          echo "New version: $new_version"
+          echo "version=$new_version" >> $GITHUB_ENV
+        shell: bash
+
+      # Step 2: Set up Chocolatey
+      - name: Set up Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+          Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
+        shell: pwsh
+
+      # Step 3: Update version in mdz.nuspec
+      - name: Update version in mdz.nuspec
+        run: |
+          $version = '${{ env.version }}'
+          if (-Not $version) {
+            Write-Error "Version is not defined! Check the output from build."
+            exit 1
+          }
+          Write-Host "Updating nuspec version to $version"
+          (Get-Content chocolatey/mdz.nuspec) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content chocolatey/mdz.nuspec
+        shell: pwsh
+
+      # Step 4: Download and extract the ZIP containing the executable
+      - name: Download and extract ZIP
+        run: |
+          $toolsDir = "$(Resolve-Path .\chocolatey\tools)"
+          New-Item -ItemType Directory -Force -Path $toolsDir | Out-Null
+          $zipFile = Join-Path $toolsDir 'mdz.zip'
+          $outputFile = Join-Path $toolsDir 'mdz.exe'
+          $url = 'https://github.com/maxwelbm/mdz/releases/download/v0.5.7/mdz_0.5.7_windows_amd64.zip'
+
+          # Download the ZIP file
+          Write-Host "Downloading ZIP from $url to $zipFile"
+          Invoke-WebRequest -Uri $url -OutFile $zipFile
+
+          # Extract the ZIP file
+          Write-Host "Extracting $zipFile to $toolsDir"
+          Expand-Archive -Path $zipFile -DestinationPath $toolsDir -Force
+        shell: pwsh
+
+      # Step 5: Calculate checksum
+      - name: Calculate checksum
+        id: calculate-checksum
+        run: |
+          $outputFile = "$(Resolve-Path .\chocolatey\tools\mdz.exe)"
+          $checksum = (Get-FileHash -Path $outputFile -Algorithm SHA256).Hash
+          echo "::set-output name=checksum::$checksum"
+        shell: pwsh
+
+      # Step 6: Replace checksum in chocolateyinstall.ps1
+      - name: Replace checksum in chocolateyinstall.ps1
+        run: |
+          (Get-Content .\chocolatey\tools\chocolateyinstall.ps1) -replace '{{CHECKSUM}}', '${{ steps.calculate-checksum.outputs.checksum }}' | Set-Content .\chocolatey\tools\chocolateyinstall.ps1
+        shell: pwsh
+
+      # Step 7: Pack and push the Chocolatey package
+      - name: Publish Chocolatey package
+        env:
+          CHOCO_API_KEY: ${{ secrets.CHOCO_TOKEN }}
+        run: |
+          choco pack chocolatey/mdz.nuspec
+          choco push chocolatey/mdz.${{ env.version }}.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+        shell: pwsh
+
+  publish-to-winget:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      # Step 1: Publish to WinGet
+      - uses: vedantmgoyal9/winget-releaser@main
+        with:
+          identifier: mdz.mdz
+          installers-regex: '\.exe$'  # Only `.exe` files
+          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}

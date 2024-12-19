@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>mdz</id>
+    <version>2.0.0</version>
+    <title>azion</title>
+    <authors>Lerian Studio</authors>
+    <projectUrl>https://github.com/LerianStudio/midaz</projectUrl>
+    <tags>mdz cli golang</tags>
+    <summary>An open-source ledger for multi-asset, multi-currency financial systems.</summary>
+    <description>Midaz is part of Lerian's Core Banking Platform, offering an immutable ledger to modernize financial operations. Currently under development and not production-ready.</description>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
