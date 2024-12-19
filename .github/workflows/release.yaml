@@ -18,21 +18,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js (required for semantic-release)
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # Step 2: Create and push Git tag
+      - name: Create Git Tag
+        id: create_tag
+        run: |
+          # Set up Git user info
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
-      # Step 3: Install dependencies for semantic-release
-      - name: Install semantic-release
-        run: npm install -g semantic-release @semantic-release/changelog @semantic-release/github @semantic-release/git
+          # Fetch all tags to avoid conflicts
+          git fetch --tags
 
-      # Step 4: Run semantic-release
-      - name: Generate version and tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: semantic-release
+          # Get the latest tag
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+
+          # Parse the version and increment the patch version
+          major=$(echo $latest_tag | cut -d. -f1 | sed 's/v//')
+          minor=$(echo $latest_tag | cut -d. -f2)
+          patch=$(echo $latest_tag | cut -d. -f3)
+          new_patch=$((patch + 1))
+          new_tag="v${major}.${minor}.${new_patch}"
+
+          # Create and push the new tag
+          git tag $new_tag
+          git push origin $new_tag
+
+          # Output the new tag for later use
+          echo "new_tag=$new_tag" >> $GITHUB_ENV
 
       # Step 5: Setup Go (required for GoReleaser)
       - name: Setup Go
