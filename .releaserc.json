@@ -5,5 +5,5 @@
     "@semantic-release/github",
     "@semantic-release/git"
   ],
-  "repositoryUrl": "https://github.com/seu-usuario/seu-repositorio"
+  "repositoryUrl": "https://github.com/maxwelbm/mdz"
 }
