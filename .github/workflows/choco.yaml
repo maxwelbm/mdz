@@ -16,20 +16,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get version from Git tags
-        id: get_version
-        run: |
-          # Obter a última tag Git
-          version=$(git describe --tags --abbrev=0 || echo "v0.0.0")
-          # Incrementar o patch
-          major=$(echo $version | cut -d. -f1 | sed 's/v//')
-          minor=$(echo $version | cut -d. -f2)
-          patch=$(echo $version | cut -d. -f3)
-          new_patch=$((patch + 1))
-          new_version="v${major}.${minor}.${new_patch}"
-          echo "New version: $new_version"
-          echo "version=$new_version" >> $GITHUB_ENV
-        shell: bash
+      # - name: Get version from Git tags
+      #   id: get_version
+      #   run: |
+      #     # Obter a última tag Git
+      #     version=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+      #     # Incrementar o patch
+      #     major=$(echo $version | cut -d. -f1 | sed 's/v//')
+      #     minor=$(echo $version | cut -d. -f2)
+      #     patch=$(echo $version | cut -d. -f3)
+      #     new_patch=$((patch + 1))
+      #     new_version="v${major}.${minor}.${new_patch}"
+      #     echo "New version: $new_version"
+      #     echo "version=$new_version" >> $GITHUB_ENV
+      #   shell: bash
 
       # Step 2: Set up Chocolatey
       - name: Set up Chocolatey
@@ -39,16 +39,21 @@ jobs:
           Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
         shell: pwsh
 
-      # Step 3: Update version in mdz.nuspec
+      - name: List Files in Workspace
+        run: |
+          Write-Host "Listing all files in the workspace:"
+          Get-ChildItem -Recurse
+        shell: pwsh
+
       - name: Update version in mdz.nuspec
         run: |
-          $version = '${{ env.version }}'
+          $version = 'v0.0.1'
           if (-Not $version) {
             Write-Error "Version is not defined! Check the output from build."
             exit 1
           }
           Write-Host "Updating nuspec version to $version"
-          (Get-Content chocolatey/mdz.nuspec) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content chocolatey/mdz.nuspec
+          (Get-Content mdz/chocolatey/mdz.nuspec) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content mdz/chocolatey/mdz.nuspec
         shell: pwsh
 
       # Step 4: Download and extract the ZIP containing the executable
