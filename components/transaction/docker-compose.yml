@@ -1,0 +1,32 @@
+services:
+  transaction:
+    container_name: midaz-transaction
+    restart: always
+    build:
+      context: ../../
+      dockerfile: ./components/transaction/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - transaction_network
+      - auth_network
+      - infra_network
+      - ledger_network
+
+networks:
+  transaction_network:
+    name: transaction_network
+    driver: bridge
+  ledger_network:
+    name: ledger_network
+    driver: bridge
+  auth_network:
+    name: auth_network
+    driver: bridge
+  infra_network:
+    name: infra_network
+    driver: bridge

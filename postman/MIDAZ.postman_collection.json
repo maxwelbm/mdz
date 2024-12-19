@@ -1,0 +1,3628 @@
+{
+	"info": {
+		"_postman_id": "ccd5450e-2711-4910-bf48-f7146fb23876",
+		"name": "MIDAZ",
+		"description": "## **How generate token to use on MIDAZ**\n\n<img src=\"https://content.pstmn.io/4d5e891d-4eee-4fc9-a934-017456eebe95/aW1hZ2UucG5n\" width=\"606\" height=\"573\">\n\n<img src=\"https://content.pstmn.io/033e5a7a-d1d1-434a-988f-31bda4bf5028/aW1hZ2UucG5n\" width=\"616\" height=\"600\">\n\n<img src=\"https://content.pstmn.io/98a264c5-2b90-4f41-b7dd-8cea8f2ea945/aW1hZ2UucG5n\" width=\"937\" height=\"730\">\n\n<img src=\"https://content.pstmn.io/c62093ff-8dd4-4df4-a73e-e3a448935224/aW1hZ2UucG5n\" width=\"937\" height=\"730\">\n\n<img src=\"https://content.pstmn.io/39566f9d-2e0b-4fd2-bf2f-15fbe211f5a9/aW1hZ2UucG5n\" width=\"937\" height=\"730\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38928920"
+	},
+	"item": [
+		{
+			"name": "Auth Casdoor Manager",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Authorization Code Grant",
+							"item": [
+								{
+									"name": "Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"postman.setEnvironmentVariable(\"access_token\", pm.request.auth.oauth2.get(\"accessToken\"));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"postman.setEnvironmentVariable(\"access_token\", pm.request.auth.oauth2.get(\"accessToken\"));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												},
+												{
+													"key": "clientSecret",
+													"value": "{{client_secret}}",
+													"type": "string"
+												},
+												{
+													"key": "clientId",
+													"value": "{{client_id}}",
+													"type": "string"
+												},
+												{
+													"key": "tokenName",
+													"value": "access_token",
+													"type": "string"
+												},
+												{
+													"key": "accessTokenUrl",
+													"value": "{{url_auth}}/api/login/oauth/access_token",
+													"type": "string"
+												},
+												{
+													"key": "authUrl",
+													"value": "{{url_auth}}/login/oauth/authorize",
+													"type": "string"
+												},
+												{
+													"key": "grant_type",
+													"value": "authorization_code",
+													"type": "string"
+												},
+												{
+													"key": "useBrowser",
+													"value": false,
+													"type": "boolean"
+												},
+												{
+													"key": "state",
+													"value": "{{$randomUUID}}",
+													"type": "string"
+												},
+												{
+													"key": "scope",
+													"value": "openid",
+													"type": "string"
+												},
+												{
+													"key": "redirect_uri",
+													"value": "http://localhost:9000/callback",
+													"type": "string"
+												},
+												{
+													"key": "refreshRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "tokenRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "authRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "challengeAlgorithm",
+													"value": "S256",
+													"type": "string"
+												},
+												{
+													"key": "client_authentication",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "<check-auth-tab>",
+											"host": [
+												"<check-auth-tab>"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Implicit Grant",
+							"item": [
+								{
+									"name": "Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"postman.setEnvironmentVariable(\"access_token\", pm.request.auth.oauth2.get(\"accessToken\"));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "clientId",
+													"value": "{{client_id}}",
+													"type": "string"
+												},
+												{
+													"key": "authUrl",
+													"value": "{{url_auth}}/login/oauth/authorize",
+													"type": "string"
+												},
+												{
+													"key": "tokenName",
+													"value": "token",
+													"type": "string"
+												},
+												{
+													"key": "useBrowser",
+													"value": false,
+													"type": "boolean"
+												},
+												{
+													"key": "state",
+													"value": "{{$randomUUID}}",
+													"type": "string"
+												},
+												{
+													"key": "scope",
+													"value": "openid",
+													"type": "string"
+												},
+												{
+													"key": "redirect_uri",
+													"value": "http://localhost:9000/callback",
+													"type": "string"
+												},
+												{
+													"key": "grant_type",
+													"value": "implicit",
+													"type": "string"
+												},
+												{
+													"key": "refreshRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "tokenRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "authRequestParams",
+													"value": [],
+													"type": "any"
+												},
+												{
+													"key": "challengeAlgorithm",
+													"value": "S256",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "queryParams",
+													"type": "string"
+												},
+												{
+													"key": "client_authentication",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "<check-auth-tab>",
+											"host": [
+												"<check-auth-tab>"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Resource Owner Password Credentials Grant",
+							"item": [
+								{
+									"name": "Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\",\n    \"username\": \"user_john\",\n    \"password\": \"Lerian@123\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_auth}}/api/login/oauth/access_token",
+											"host": [
+												"{{url_auth}}"
+											],
+											"path": [
+												"api",
+												"login",
+												"oauth",
+												"access_token"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Client Credentials Grant",
+							"item": [
+								{
+									"name": "Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_auth}}/api/login/oauth/access_token",
+											"host": [
+												"{{url_auth}}"
+											],
+											"path": [
+												"api",
+												"login",
+												"oauth",
+												"access_token"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Refresh Token",
+							"item": [
+								{
+									"name": "Login",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"grant_type\": \"refresh_token\",\n    \"refresh_token\": \"{{access_token}}\",\n    \"scope\": \"profile\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_auth}}/api/login/oauth/refresh_token",
+											"host": [
+												"{{url_auth}}"
+											],
+											"path": [
+												"api",
+												"login",
+												"oauth",
+												"refresh_token"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Token Introspection",
+					"item": [
+						{
+							"name": "Verify Token",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{client_secret}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{client_id}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "text"
+										},
+										{
+											"key": "token_type_hint",
+											"value": "access_token",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_auth}}/api/login/oauth/introspect",
+									"host": [
+										"{{url_auth}}"
+									],
+									"path": [
+										"api",
+										"login",
+										"oauth",
+										"introspect"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "[Casdoor](https://casdoor.org/docs/overview/)\n\n[Casdoor GIT](https://github.com/casdoor/casdoor)\n\n<img src=\"https://content.pstmn.io/4b2b1027-9d5f-473b-b9d7-9c1bdab03537/aW1hZ2UucG5n\" alt=\"\" height=\"918\" width=\"1788\">"
+		},
+		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Organizations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"organization_id before: \" + pm.collectionVariables.get(\"organization_id\"));",
+									"    pm.collectionVariables.set(\"organization_id\", jsonData.id);",
+									"    console.log(\"organization_id after: \" + pm.collectionVariables.get(\"organization_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"legalName\": \"{{$randomCompanyName}}\",\n    //\"parentOrganizationId\": \"{{organization_id}}\",\n    \"doingBusinessAs\": \"The ledger.io\", //opcional\n    \"legalDocument\": \"78425230000190\",\n    \"status\": {\n        \"code\": \"ACTIVE\",\n        \"description\": \"Ledger Test\"\n    },\n    \"address\": {\n        \"line1\": \"Avenida Paulista, 1234\",\n        \"line2\": \"CJ 203\",\n        \"zipCode\": \"01310916\",\n        \"city\": \"{{$randomCity}}\",\n        \"state\": \"{{$randomCountryCode}}\",\n        \"country\": \"{{$randomCountryCode}}\" //de acordo com a ISO 3166-1 alpha2\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_chave\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Organizations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"legalName\": \"{{$randomCompanyName}}\",\n    \"parentOrganizationId\": \"{{organization_id}}\",\n    \"doingBusinessAs\": \"The ledger.io\", //opcional\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked organization\"\n    },\n    \"address\": {\n        \"line1\": \"Avenida Paulista, 1234\",\n        \"line2\": \"CJ 203\",\n        \"zipCode\": \"01310916\",\n        \"city\": \"{{$randomCity}}\",\n        \"state\": \"{{$randomCountryCode}}\",\n        \"country\": \"{{$randomCountryCode}}\" //de acordo com a ISO 3166-1 alpha2\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Organizations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations?limit=6&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Organizations by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Organizations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ledgers",
+			"item": [
+				{
+					"name": "Ledgers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"ledger_id before: \" + pm.collectionVariables.get(\"ledger_id\"));",
+									"    pm.collectionVariables.set(\"ledger_id\", jsonData.id);",
+									"    console.log(\"ledger_id after: \" + pm.collectionVariables.get(\"ledger_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomCompanyName}}\",\n    \"status\": {\n        \"code\": \"ACTIVE\",\n        \"description\": \"Ledger Test\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ledgers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"BLOCKED Tech LTDA\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked ledger\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ledgers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers?limit=5&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ledgers by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ledgers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "Assets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"asset_id before: \" + pm.collectionVariables.get(\"asset_id\"));",
+									"    pm.collectionVariables.set(\"asset_id\", jsonData.id);",
+									"    console.log(\"asset_id after: \" + pm.collectionVariables.get(\"asset_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Brazilian Real\",\n    //\"name\": \"{{$randomCurrencyName}}\",\n    \"type\": \"currency\",\n    \"code\": \"BRL\",\n    //\"code\": \"{{$randomCurrencyCode}}\",\n    \"status\": {\n        \"code\": \"ACTIVE\",\n        \"description\": \"Asset Test\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/assets",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"assets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bitcoin\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked asset\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"boolean\": true,\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/assets/{{asset_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/assets?limit=2&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assets by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/assets/{{asset_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assets",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/assets/{{asset_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portfolios",
+			"item": [
+				{
+					"name": "Portfolios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"portfolio_id before: \" + pm.collectionVariables.get(\"portfolio_id\"));",
+									"    pm.collectionVariables.set(\"portfolio_id\", jsonData.id);",
+									"    console.log(\"portfolio_id after: \" + pm.collectionVariables.get(\"portfolio_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"entityId\": \"{{$randomUUID}}\",\n    \"name\": \"{{$randomUserName}} Portfolio\",\n    \"status\": {\n        \"code\": \"ACTIVE\",\n        \"description\": \"Portfolio Test\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomUserName}} Blocked Portfolio\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked Portfolio\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios?limit=10&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolios by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolios",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"product_id before: \" + pm.collectionVariables.get(\"product_id\"));",
+									"    pm.collectionVariables.set(\"product_id\", jsonData.id);",
+									"    console.log(\"product_id after: \" + pm.collectionVariables.get(\"product_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Product {{$randomProductName}}\",\n    \"status\": {\n        \"code\": \"ACTIVE\",\n        \"description\": \"Product Test\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/products",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Product {{$randomProductName}} BLOCKED\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked Product\"\n    },\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/products/{{product_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/products?limit=5&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"products"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/products/{{product_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/products/{{product_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Accounts from Portfolio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"account_id before: \" + pm.collectionVariables.get(\"account_id\"));",
+									"    pm.collectionVariables.set(\"account_id\", jsonData.id);",
+									"    console.log(\"account_id after: \" + pm.collectionVariables.get(\"account_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetCode\": \"BRL\",\n    \"name\": \"{{$randomBankAccountName}}\",\n    \"alias\": \"@wallet_{{$randomBankAccount}}\",\n    \"type\": \"creditCard\",\n    //\"parentAccountId\": \"{{account_id}}\",\n    //\"entityId\": \"{{$randomUUID}}\", //optional\n    \"productId\": \"{{product_id}}\",\n    \"status\": {\n        \"code\": \"CREDIT\",\n        \"description\": \"Account Test\"\n    },\n    \"allowSending\": true,\n    \"allowReceiving\": true,\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/accounts",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"if (jsonData.hasOwnProperty('id')) {",
+									"    console.log(\"account_id before: \" + pm.collectionVariables.get(\"account_id\"));",
+									"    pm.collectionVariables.set(\"account_id\", jsonData.id);",
+									"    console.log(\"account_id after: \" + pm.collectionVariables.get(\"account_id\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetCode\": \"BRL\",\n    \"name\": \"{{$randomBankAccountName}}\",\n    \"alias\": \"@wallet_{{$randomBankAccount}}\",\n    \"type\": \"creditCard\",\n    //\"parentAccountId\": \"{{account_id}}\",\n    //\"entityId\": \"{{$randomUUID}}\", //optional\n    \"portfolioId\": \"{{portfolio_id}}\",\n    \"productId\": \"{{product_id}}\",\n    \"status\": {\n        \"code\": \"CREDIT\",\n        \"description\": \"Account Test\"\n    },\n    \"allowSending\": true,\n    \"allowReceiving\": true,\n    \"metadata\": {\n        \"chave\": \"metadata_sample\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts from Portfolio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomBankAccountName}} Blocked Account\", //opcional\n    \"alias\": \"Wallet {{$randomBankAccount}}\",\n    \"productId\": \"{{product_id}}\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked account\"\n    },\n    \"allowSending\": true,\n    \"allowReceiving\": true,\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomBankAccountName}} Blocked Account\", //opcional\n    \"alias\": \"Wallet {{$randomBankAccount}}\",\n    \"productId\": \"{{product_id}}\",\n    \"status\": {\n        \"code\": \"BLOCKED\",\n        \"description\": \"My blocked account\"\n    },\n    \"allowSending\": true,\n    \"allowReceiving\": true,\n    \"metadata\": {\n        \"chave\": \"metadata_sample_update\",\n        \"bitcoinn\": \"{{$randomBitcoin}}\",\n        \"boolean\": {{$randomBoolean}},\n        \"double\": 10.5,\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account from Portfolio by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts from Portfolio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/accounts?limit=10&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts?limit=10&page=1",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "metadata.chave",
+									"value": "mymetadata",
+									"description": "Search on MongoDB",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Default 1"
+								},
+								{
+									"key": "portfolio_id",
+									"value": "{{portfolio_id}}",
+									"description": "Retrives only accounts from the specified portfolio",
+									"disabled": true
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts from Portfolio",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_ledger}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts/{{account_id}}",
+							"host": [
+								"{{url_ledger}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts",
+								"{{account_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Transaction JSON",
+					"item": [
+						{
+							"name": "Transaction",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"if (jsonData.hasOwnProperty('id')) {",
+											"    console.log(\"transaction_id before: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"    pm.collectionVariables.set(\"transaction_id\", jsonData.id);",
+											"    console.log(\"transaction_id after: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Midaz-ID",
+										"value": "{{$randomUUID}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"chartOfAccountsGroupName\": \"PAG_CONTAS_CODE_1\",\n    \"description\": \"description for the transaction person1 to person2 value of 100 reais\",\n    \"metadata\": {\n        \"mensagem\": \"pagamento\",\n        \"valor\": \"100\"\n    },\n    \"send\": {\n        \"asset\": \"BRL\",\n        \"value\": 1000,\n        \"scale\": 1,\n        \"source\": {\n            \"from\": [\n                {\n                    \"account\": \"@person1\",\n                    \"amount\": {\n                        \"asset\": \"BRL\",\n                        \"value\": 1000,\n                        \"scale\": 1\n                    },\n                    \"description\": \"Loan payment person1\",\n                    \"chartOfAccountsG\": \"\",\n                    \"metadata\": {\n                        \"1\": \"m\",\n                        \"Cpf\": \"43049498x\"\n                    },\n                    \"isFrom\": true\n                }\n            ]\n        }\n    },\n    \"distribute\": {\n        \"to\": [\n            {\n                \"account\": \"@person2\",\n                \"amount\": {\n                    \"asset\": \"BRL\",\n                    \"value\": 5000,\n                    \"scale\": 2\n                },\n                \"chartOfAccountsG\": \"\",\n                \"metadata\": {\n                    \"mensagem\": \"tks\"\n                }\n            },\n            {\n                \"account\": \"@person3\",\n                \"share\": {\n                    \"percentage\": 35\n                },\n                \"chartOfAccountsG\": \"\"\n            },\n            {\n                \"account\": \"@person4\",\n                \"remaining\": \"remaining\",\n                \"chartOfAccountsG\": \"\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/json",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"transactions",
+										"json"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transaction DSL",
+					"item": [
+						{
+							"name": "Transaction",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"if (jsonData.hasOwnProperty('id')) {",
+											"    console.log(\"transaction_id before: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"    pm.collectionVariables.set(\"transaction_id\", jsonData.id);",
+											"    console.log(\"transaction_id after: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "idempotencyKey",
+										"value": "{{$randomUUID}}",
+										"type": "text"
+									},
+									{
+										"key": "tolerance",
+										"value": "300",
+										"description": "seconds",
+										"type": "text"
+									},
+									{
+										"key": "Midaz-ID",
+										"value": "{{$randomUUID}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dsl",
+											"description": "test 1",
+											"type": "file",
+											"src": "/home/gbrecci/Downloads/file.gold"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/dsl",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"transactions",
+										"dsl"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transaction Template",
+					"item": [
+						{
+							"name": "Transaction",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"if (jsonData.hasOwnProperty('id')) {",
+											"    console.log(\"transaction_id before: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"    pm.collectionVariables.set(\"transaction_id\", jsonData.id);",
+											"    console.log(\"transaction_id after: \" + pm.collectionVariables.get(\"transaction_id\"));",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transactionType\": \"{{$randomUUID}}\",\n    \"transactionTypeCode\": \"P2P_TRANSFER\",\n    \"variables\": {\n        \"amount\": 100,\n        \"destination\": \"@Wallet_16750673\",\n        \"sourceAccount\": \"@person1\",\n        \"scale\": 0\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/templates",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"transactions",
+										"templates"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Transactions Revert",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dsl",
+											"description": "ok",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction.gold"
+										},
+										{
+											"key": "dsl",
+											"description": "empty",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/empty.gold",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "error",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/error.gold",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "wrong extension",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction.yml",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "template",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction-template.gold",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/{{transaction_id}}/revert",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"transactions",
+										"{{transaction_id}}",
+										"revert"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Transactions Commit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dsl",
+											"description": "ok",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction.gold"
+										},
+										{
+											"key": "dsl",
+											"description": "empty",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/empty.gold",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "error",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/error.gold",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "wrong extension",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction.yml",
+											"disabled": true
+										},
+										{
+											"key": "dsl",
+											"description": "template",
+											"type": "file",
+											"src": "/Users/mcgregor/Documents/LERIAND/GO/midaz/components/transaction/examples/transaction-template.gold",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/{{transaction_id}}/commit",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"transactions",
+										"{{transaction_id}}",
+										"commit"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"transaction description person1 to person2 value of 100 reais\",\n    \"metadata\": {\n        \"mensagem\": \"pagamento\",\n        \"valor\": \"100\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/{{transaction_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"transactions",
+								"{{transaction_id}}"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/{{transaction_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"transactions",
+								"{{transaction_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor Pagination",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operations",
+			"item": [
+				{
+					"name": "Operations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"transaction description person1 to person2 value of 100 reais\",\n    \"metadata\": {\n        \"mensagem\": \"pagamento\",\n        \"valor\": \"100\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/transactions/{{transaction_id}}/operations/{{operation_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"transactions",
+								"{{transaction_id}}",
+								"operations",
+								"{{operation_id}}"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Account -> Operations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts/{{account_id}}/operations",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts",
+								"{{account_id}}",
+								"operations"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor Pagination",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts -> Operation by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/accounts/{{account_id}}/operations/{{operation_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"accounts",
+								"{{account_id}}",
+								"operations",
+								"{{operation_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portofolios -> Operations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/operations",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"operations"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor Pagination",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolios -> Operation by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/portfolios/{{portfolio_id}}/operations/{{operation_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"portfolios",
+								"{{portfolio_id}}",
+								"operations",
+								"{{operation_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asset Rates",
+			"item": [
+				{
+					"name": "Asset rates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.hasOwnProperty('id')) {\r",
+									"    console.log(\"external_id before: \" + pm.collectionVariables.get(\"external_id\"));\r",
+									"    pm.collectionVariables.set(\"external_id\", jsonData.id);\r",
+									"    console.log(\"external_id after: \" + pm.collectionVariables.get(\"external_id\"));\r",
+									"}\r",
+									"\r",
+									"if (jsonData.hasOwnProperty('from')) {\r",
+									"    console.log(\"asset_rate_from_asset_code before: \" + pm.collectionVariables.get(\"asset_rate_from_asset_code\"));\r",
+									"    pm.collectionVariables.set(\"asset_rate_from_asset_code\", jsonData.from);\r",
+									"    console.log(\"asset_rate_from_asset_code after: \" + pm.collectionVariables.get(\"asset_rate_from_asset_code\"));\r",
+									"}\r",
+									"\r",
+									"if (jsonData.hasOwnProperty('to')) {\r",
+									"    console.log(\"asset_rate_to_asset_code before: \" + pm.collectionVariables.get(\"asset_rate_to_asset_code\"));\r",
+									"    pm.collectionVariables.set(\"asset_rate_to_asset_code\", jsonData.from);\r",
+									"    console.log(\"asset_rate_to_asset_code after: \" + pm.collectionVariables.get(\"asset_rate_to_asset_code\"));\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"from\": \"USD\",\n    \"to\": \"BRL\",\n    \"rate\": 1000,\n    \"scale\": 2,\n    \"source\": \"External System 2\",\n    \"ttl\": 3600,\n    \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n    \"metadata\": {\n        \"string\": \"string\",\n        \"int\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"asset-rates"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Midaz-ID",
+										"value": "{{$randomUUID}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from\": \"USD\",\n    \"to\": \"BRL\",\n    \"rate\": 1000,\n    \"scale\": 2,\n    \"source\": \"External System 2\",\n    \"ttl\": 3600,\n    \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n    \"metadata\": {\n        \"string\": \"string\",\n        \"int\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"asset-rates"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Dec 2024 19:42:41 GMT",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "425",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "X-Correlation-Id",
+									"value": "3e97d0ff-6d14-42f4-8b60-b2248441d8a3",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Midaz-Id",
+									"value": "b125a033-f4d8-4309-bfdf-1300b051915b",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"01939858-92fc-78b0-8ad5-acd0e81f3216\",\n    \"organizationId\": \"01939842-ce59-720a-beac-ba57a4db8622\",\n    \"ledgerId\": \"01939842-dc08-78ec-b03e-8b6200f11314\",\n    \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n    \"from\": \"USD\",\n    \"to\": \"BRL\",\n    \"rate\": 1000,\n    \"scale\": 2,\n    \"source\": \"External System 2\",\n    \"ttl\": 3600,\n    \"createdAt\": \"2024-12-05T16:16:14.617577-03:00\",\n    \"updatedAt\": \"2024-12-05T16:42:41.916575251-03:00\",\n    \"metadata\": {\n        \"int\": 1,\n        \"string\": \"string\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Asset Rates by External ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates/{{external_id}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"asset-rates",
+								"{{external_id}}"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Midaz-ID",
+										"value": "{{$randomUUID}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates/{{external_id}}",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"asset-rates",
+										"{{external_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"01939984-0ad7-7b34-aecd-2fc17b7bf9f5\",\n    \"organizationId\": \"01939983-8fa8-7b57-bc3e-1f24d0675781\",\n    \"ledgerId\": \"01939983-b0dd-7053-a0ba-6a31df62f7c0\",\n    \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n    \"from\": \"BRL\",\n    \"to\": \"USD\",\n    \"rate\": 600,\n    \"scale\": 2,\n    \"source\": \"External System\",\n    \"ttl\": 3600,\n    \"createdAt\": \"2024-12-05T22:09:47.863527-03:00\",\n    \"updatedAt\": \"2024-12-05T22:09:47.863527-03:00\",\n    \"metadata\": {\n        \"int\": 1,\n        \"string\": \"string\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Asset Rates by Asset Codes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.hasOwnProperty('id')) {\r",
+									"    console.log(\"asset_rate_id before: \" + pm.collectionVariables.get(\"asset_rate_id\"));\r",
+									"    pm.collectionVariables.set(\"ledger_id\", jsonData.id);\r",
+									"    console.log(\"asset_rate_id after: \" + pm.collectionVariables.get(\"asset_rate_id\"));\r",
+									"}\r",
+									"\r",
+									"if (jsonData.hasOwnProperty('from')) {\r",
+									"    console.log(\"asset_rate_from_asset_code before: \" + pm.collectionVariables.get(\"asset_rate_from_asset_code\"));\r",
+									"    pm.collectionVariables.set(\"asset_rate_from_asset_code\", jsonData.from);\r",
+									"    console.log(\"asset_rate_from_asset_code after: \" + pm.collectionVariables.get(\"asset_rate_from_asset_code\"));\r",
+									"}\r",
+									"\r",
+									"if (jsonData.hasOwnProperty('to')) {\r",
+									"    console.log(\"asset_rate_to_asset_code before: \" + pm.collectionVariables.get(\"asset_rate_to_asset_code\"));\r",
+									"    pm.collectionVariables.set(\"asset_rate_to_asset_code\", jsonData.from);\r",
+									"    console.log(\"asset_rate_to_asset_code after: \" + pm.collectionVariables.get(\"asset_rate_to_asset_code\"));\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Midaz-ID",
+								"value": "{{$randomUUID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates/from/{{asset_rate_from_asset_code}}",
+							"host": [
+								"{{url_transaction}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"asset-rates",
+								"from",
+								"{{asset_rate_from_asset_code}}"
+							],
+							"query": [
+								{
+									"key": "to",
+									"value": "BRL,USD,SGD",
+									"disabled": true
+								},
+								{
+									"key": "start_date",
+									"value": "2021-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor Pagination",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-01",
+									"description": "Date in the format yyyy-mm-dd",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Enum(asc,desc)",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Default 10",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Midaz-ID",
+										"value": "{{$randomUUID}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url_transaction}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/asset-rates/from/{{asset_rate_from_asset_code}}?to=USD,BRL,EUR&limit=10&page=1",
+									"host": [
+										"{{url_transaction}}"
+									],
+									"path": [
+										"v1",
+										"organizations",
+										"{{organization_id}}",
+										"ledgers",
+										"{{ledger_id}}",
+										"asset-rates",
+										"from",
+										"{{asset_rate_from_asset_code}}"
+									],
+									"query": [
+										{
+											"key": "to",
+											"value": "USD,BRL,EUR"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": [\n        {\n            \"id\": \"01939984-0ad7-7b34-aecd-2fc17b7bf9f5\",\n            \"organizationId\": \"01939983-8fa8-7b57-bc3e-1f24d0675781\",\n            \"ledgerId\": \"01939983-b0dd-7053-a0ba-6a31df62f7c0\",\n            \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n            \"from\": \"BRL\",\n            \"to\": \"USD\",\n            \"rate\": 600,\n            \"scale\": 2,\n            \"source\": \"External System\",\n            \"ttl\": 3600,\n            \"createdAt\": \"2024-12-05T22:09:47.863527-03:00\",\n            \"updatedAt\": \"2024-12-05T22:09:47.863527-03:00\",\n            \"metadata\": {\n                \"int\": 1,\n                \"string\": \"string\"\n            }\n        },\n        {\n            \"id\": \"01939983-f365-77c1-8223-732f60763a77\",\n            \"organizationId\": \"01939983-8fa8-7b57-bc3e-1f24d0675781\",\n            \"ledgerId\": \"01939983-b0dd-7053-a0ba-6a31df62f7c0\",\n            \"externalId\": \"04089c2e-75d3-4672-add3-daa73388af84\",\n            \"from\": \"BRL\",\n            \"to\": \"EUR\",\n            \"rate\": 600,\n            \"scale\": 2,\n            \"source\": \"External System\",\n            \"ttl\": 3600,\n            \"createdAt\": \"2024-12-05T22:09:41.861465-03:00\",\n            \"updatedAt\": \"2024-12-05T22:09:41.861465-03:00\",\n            \"metadata\": {\n                \"int\": 1,\n                \"string\": \"string\"\n            }\n        }\n    ],\n    \"page\": 1,\n    \"limit\": 10\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Audit",
+			"item": [
+				{
+					"name": "Read audit logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_audit}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/audit/{{audit_id}}/read-logs",
+							"host": [
+								"{{url_audit}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"audit",
+								"{{audit_id}}",
+								"read-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate log values",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_audit}}/v1/organizations/{{organization_id}}/ledgers/{{ledger_id}}/audit/{{audit_id}}/audit-logs",
+							"host": [
+								"{{url_audit}}"
+							],
+							"path": [
+								"v1",
+								"organizations",
+								"{{organization_id}}",
+								"ledgers",
+								"{{ledger_id}}",
+								"audit",
+								"{{audit_id}}",
+								"audit-logs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "authRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenName",
+				"value": "access_token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "state",
+				"value": "{{$randomUUID}}",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "openid",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "http://localhost:9000/callback",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{url_auth}}/login/oauth/authorize",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{url_auth}}/api/login/oauth/access_token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_secret",
+			"value": "dd03f916cacf4a98c6a413d9c38ba102dce436a9",
+			"type": "default"
+		},
+		{
+			"key": "client_id",
+			"value": "9670e0ca55a29a466d31",
+			"type": "default"
+		},
+		{
+			"key": "url_auth",
+			"value": "http://127.0.0.1:8080",
+			"type": "default"
+		},
+		{
+			"key": "url_ledger",
+			"value": "http://127.0.0.1:3000",
+			"type": "default"
+		},
+		{
+			"key": "url_transaction",
+			"value": "http://127.0.0.1:3002",
+			"type": "default"
+		},
+		{
+			"key": "organization_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ledger_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "product_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "portfolio_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "asset_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "account_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "transaction_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "operation_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "asset_rate_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
