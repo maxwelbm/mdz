@@ -1,7 +1,6 @@
 name: "Publish Packages Choco"
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
@@ -96,7 +95,6 @@ jobs:
 
   publish-to-winget:
     runs-on: windows-latest
-    needs: build
     steps:
       # Step 1: Publish to WinGet
       - uses: vedantmgoyal9/winget-releaser@main
