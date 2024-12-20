@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3 
 
-      - name: List Files 01
+      - name: List Files
         run: |
           Write-Host "Listing all files in the workspace:"
           Get-ChildItem -Recurse
@@ -30,35 +30,18 @@ jobs:
           Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
         shell: pwsh
 
-      - name: List Files in Workspace 02
+      - name: Update nuspec version
         run: |
-          Write-Host "Listing all files in the workspace:"
-          Get-ChildItem -Recurse
-        shell: pwsh
-
-      # - name: Update version in mdz.nuspec
-      #   run: |
-      #     $version = 'v0.0.1'
-      #     if (-Not $version) {
-      #       Write-Error "Version is not defined! Check the output from build."
-      #       exit 1
-      #     }
-      #     Write-Host "Updating nuspec version to $version"
-      #     (Get-Content .\mdz\chocolatey\mdz.nuspec) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content .\mdz\chocolatey\mdz.nuspec
-      #   shell: pwsh
-
-      - name: Debug and Update nuspec
-        run: |
-          # Depurar estrutura
-          Write-Host "Listing files in workspace"
-          Get-ChildItem -Recurse
+          # Define o caminho correto para o arquivo nuspec
+          $nuspecPath = Resolve-Path .\chocolatey\mdz.nuspec
       
-          # Atualizar o arquivo nuspec
-          $nuspecPath = "$(Resolve-Path .\mdz\chocolatey\mdz.nuspec)"
+          # Verifica se o arquivo existe
           if (-Not (Test-Path $nuspecPath)) {
             Write-Error "The nuspec file was not found at $nuspecPath"
             exit 1
           }
+      
+          # Atualiza a versão no arquivo nuspec
           $version = 'v0.0.1'
           Write-Host "Updating nuspec version to $version"
           (Get-Content $nuspecPath) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content $nuspecPath
