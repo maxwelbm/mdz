@@ -75,12 +75,20 @@ jobs:
           (Get-Content .\chocolatey\tools\chocolateyinstall.ps1) -replace '{{CHECKSUM}}', '${{ steps.calculate-checksum.outputs.checksum }}' | Set-Content .\chocolatey\tools\chocolateyinstall.ps1
         shell: pwsh
 
+      # - name: Publish Chocolatey package
+      #   env:
+      #     CHOCO_API_KEY: ${{ secrets.CHOCO_TOKEN }}
+      #   run: |
+      #     choco pack chocolatey/mdz.nuspec
+      #     choco push chocolatey/mdz.${{ env.version }}.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+      #   shell: pwsh
+
       - name: Publish Chocolatey package
         env:
           CHOCO_API_KEY: ${{ secrets.CHOCO_TOKEN }}
         run: |
           choco pack chocolatey/mdz.nuspec
-          choco push chocolatey/mdz.${{ env.version }}.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+          choco push mdz.0.0.1.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
         shell: pwsh
 
   publish-to-winget:
