@@ -31,11 +31,7 @@ builds:
       - -X github.com/LerianStudio/midaz/components/mdz/pkg/environment.Version={{.Version}}
 
 archives:
-  - builds:
-      - "mdz"
-    format: binary # Publica como binário puro
-    name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    wrap_in_directory: false # Evita incluir o binário dentro de um diretório
+  - format: zip
 
 nfpms:
   - id: packages
