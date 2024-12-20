@@ -15,68 +15,86 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3 
 
-      - name: List Files
-        run: |
-          Write-Host "Listing all files in the workspace:"
-          Get-ChildItem -Recurse
+      - name: Authenticate GitHub CLI
+        run: echo $env:GITHUB_TOKEN | gh auth login --with-token
         shell: pwsh
 
-      - name: Set up Chocolatey
+      - name: Fetch Latest Tag
+        id: latest_tag
         run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-          Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
+          $RawRelease = gh release list --repo $env:GITHUB_REPOSITORY --limit 1 --json tagName --jq '.[0].tagName'
+          $FormattedRelease = $RawRelease -replace '^v', ''
+          Write-Host "Formatted release: $FormattedRelease"
+          echo "tag=$FormattedRelease" >> $env:GITHUB_ENV
         shell: pwsh
 
-      - name: Update nuspec version
+      - name: Print Latest Tag
         run: |
-          # Define o caminho correto para o arquivo nuspec
-          $nuspecPath = Resolve-Path .\chocolatey\mdz.nuspec
-      
-          if (-Not (Test-Path $nuspecPath)) {
-            Write-Error "The nuspec file was not found at $nuspecPath"
-            exit 1
-          }
-      
-          $version = '0.5.10'
-          Write-Host "Updating nuspec version to $version"
-          (Get-Content $nuspecPath) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content $nuspecPath
+          Write-Host "The latest tag is: $env:tag"
         shell: pwsh
 
-      - name: Download and extract ZIP
-        run: |
-          $toolsDir = "$(Resolve-Path .\chocolatey\tools)"
-          New-Item -ItemType Directory -Force -Path $toolsDir | Out-Null
-          $zipFile = Join-Path $toolsDir 'mdz.zip'
-          $outputFile = Join-Path $toolsDir 'mdz.exe'
-          $url = 'https://github.com/maxwelbm/mdz/releases/download/v0.5.7/mdz_0.5.7_windows_amd64.zip'
+      # - name: List Files
+      #   run: |
+      #     Write-Host "Listing all files in the workspace:"
+      #     Get-ChildItem -Recurse
+      #   shell: pwsh
 
-          # Download the ZIP file
-          Write-Host "Downloading ZIP from $url to $zipFile"
-          Invoke-WebRequest -Uri $url -OutFile $zipFile
-
-          # Extract the ZIP file
-          Write-Host "Extracting $zipFile to $toolsDir"
-          Expand-Archive -Path $zipFile -DestinationPath $toolsDir -Force
-        shell: pwsh
-
-      - name: Calculate checksum
-        id: calculate-checksum
-        run: |
-          $outputFile = "$(Resolve-Path .\chocolatey\tools\mdz.exe)"
-          $checksum = (Get-FileHash -Path $outputFile -Algorithm SHA256).Hash
-          echo "::set-output name=checksum::$checksum"
-        shell: pwsh
-
-      - name: Replace checksum in chocolateyinstall.ps1
-        run: |
-          (Get-Content .\chocolatey\tools\chocolateyinstall.ps1) -replace '{{CHECKSUM}}', '${{ steps.calculate-checksum.outputs.checksum }}' | Set-Content .\chocolatey\tools\chocolateyinstall.ps1
-        shell: pwsh
-
-      - name: Publish Chocolatey package
-        env:
-          CHOCO_API_KEY: ${{ secrets.CHOCO_TOKEN }}
-        run: |
-          choco pack chocolatey/mdz.nuspec
-          choco push mdz.0.5.10.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
-        shell: pwsh
+      # - name: Set up Chocolatey
+      #   run: |
+      #     Set-ExecutionPolicy Bypass -Scope Process -Force
+      #     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+      #     Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
+      #   shell: pwsh
+      #
+      # - name: Update nuspec version
+      #   run: |
+      #     # Define o caminho correto para o arquivo nuspec
+      #     $nuspecPath = Resolve-Path .\chocolatey\mdz.nuspec
+      #
+      #     if (-Not (Test-Path $nuspecPath)) {
+      #       Write-Error "The nuspec file was not found at $nuspecPath"
+      #       exit 1
+      #     }
+      #
+      #     $version = '0.5.10'
+      #     Write-Host "Updating nuspec version to $version"
+      #     (Get-Content $nuspecPath) -replace '<version>.*</version>', "<version>$version</version>" | Set-Content $nuspecPath
+      #   shell: pwsh
+      #
+      # - name: Download and extract ZIP
+      #   run: |
+      #     $toolsDir = "$(Resolve-Path .\chocolatey\tools)"
+      #     New-Item -ItemType Directory -Force -Path $toolsDir | Out-Null
+      #     $zipFile = Join-Path $toolsDir 'mdz.zip'
+      #     $outputFile = Join-Path $toolsDir 'mdz.exe'
+      #     $url = 'https://github.com/maxwelbm/mdz/releases/download/v0.5.7/mdz_0.5.7_windows_amd64.zip'
+      #
+      #     # Download the ZIP file
+      #     Write-Host "Downloading ZIP from $url to $zipFile"
+      #     Invoke-WebRequest -Uri $url -OutFile $zipFile
+      #
+      #     # Extract the ZIP file
+      #     Write-Host "Extracting $zipFile to $toolsDir"
+      #     Expand-Archive -Path $zipFile -DestinationPath $toolsDir -Force
+      #   shell: pwsh
+      #
+      # - name: Calculate checksum
+      #   id: calculate-checksum
+      #   run: |
+      #     $outputFile = "$(Resolve-Path .\chocolatey\tools\mdz.exe)"
+      #     $checksum = (Get-FileHash -Path $outputFile -Algorithm SHA256).Hash
+      #     echo "::set-output name=checksum::$checksum"
+      #   shell: pwsh
+      #
+      # - name: Replace checksum in chocolateyinstall.ps1
+      #   run: |
+      #     (Get-Content .\chocolatey\tools\chocolateyinstall.ps1) -replace '{{CHECKSUM}}', '${{ steps.calculate-checksum.outputs.checksum }}' | Set-Content .\chocolatey\tools\chocolateyinstall.ps1
+      #   shell: pwsh
+      #
+      # - name: Publish Chocolatey package
+      #   env:
+      #     CHOCO_API_KEY: ${{ secrets.CHOCO_TOKEN }}
+      #   run: |
+      #     choco pack chocolatey/mdz.nuspec
+      #     choco push mdz.0.5.10.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+      #   shell: pwsh
